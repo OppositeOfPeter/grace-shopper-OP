@@ -3,6 +3,7 @@ import Home from './Home';
 import Login from './Login';
 import Cart from './Cart';
 import ProductsList from './ProductList'; //NR
+import CreateAccount from './CreateAccount';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken, fetchCart, fetchProducts } from '../store';
 import { Link, Routes, Route } from 'react-router-dom';

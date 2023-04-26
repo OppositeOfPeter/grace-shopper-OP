@@ -13,5 +13,11 @@ app.get('/', (req, res) =>
 app.use('/api/auth', require('./api/auth'));
 app.use('/api/orders', require('./api/orders'));
 app.use('/api/products', require('./api/products'));
+app.use('/api/users', require('./api/users'));
+
+app.use((err, req, res, next)=> {
+  console.log(err);
+  res.status(500).send({ error: err });
+});
 
 module.exports = app;
