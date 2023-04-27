@@ -1,0 +1,60 @@
+import axios from 'axios';
+
+
+const users = (state = [], action)=> {
+  
+  if(action.type === 'SET_USERS'){
+    return action.users;
+  }
+  
+  if(action.type === 'DELETE_USER'){
+    return state.filter(user => user.id !== action.user.id);
+  }
+  
+  if(action.type === 'CREATE_USER'){
+    return [...state, action.user];
+  }
+  
+  if(action.type === 'UPDATE_USER'){
+    return state.map(user => {
+      if(user.id === action.user.id){
+        return action.user;
+      }
+      return user;
+    });
+  }
+  
+  return state;
+};
+
+
+export const fetchUsers = ()=> {
+  return async(dispatch)=> {
+    const res = await axios.get('/api/users');
+    dispatch({ type: 'SET_USERS', users: res.data });
+  };
+};
+
+export const createUser = (user)=> {
+  return async(dispatch)=> {
+    const res = await axios.post('/api/users', user);
+    dispatch({ type: 'CREATE_USER', user: res.data});
+  };
+};
+/*
+export const deleteUser = (user)=> {
+  return async(dispatch)=> {
+    await axios.delete(`/api/users/${user.id}`);
+    dispatch({ type: 'DELETE_USER', user});
+  };
+};
+
+export const updateUser = (user)=> {
+  return async(dispatch)=> {
+    const res = await axios.put(`/api/users/${user.id}`, user);
+    dispatch({ type: 'UPDATE_USER', user: res.data});
+  };
+};
+*/
+
+export default users;
