@@ -144,7 +144,12 @@ User.authenticate = async function({ username, password }){
   const error = new Error('bad credentials');
   error.status = 401;
   throw error;
-}
+};
+
+User.register = async function(credentials){
+  const user = await this.create(credentials);
+  return user.generateToken();
+};
 
 module.exports = User;
 
