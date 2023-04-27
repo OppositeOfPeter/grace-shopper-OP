@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteItem, fetchCart, logout } from "../store";
+import { deleteItem, logout, updateCart } from "../store";
 import { Link, useNavigate } from "react-router-dom";
 
 const Cart = () => {
@@ -10,6 +10,7 @@ const Cart = () => {
 
   const lineItems = cart.lineItems;
 
+  // needs testing
   // const createLineItem = async (ev) => {
   //   ev.preventDefault();
   //   await dispatch(createItem({ quantity, productId }));
@@ -19,15 +20,7 @@ const Cart = () => {
   const deleteLineItem = async (lineItem) => {
     const product = lineItem.product;
     const newQuantity = lineItem.quantity - 1;
-    // const _cart = cart.lineItems.filter((_lineItem) => {
-    //   console.log(lineItem);
-    //   console.log(_lineItem);
-    //   if (_lineItem.id !== lineItem.id) {
-    //     return _lineItem;
-    //   }
-    //   return (_lineItem.quantity = _lineItem.quantity - 1);
-    // });
-    dispatch(deleteItem({ product, quantity: newQuantity }));
+    dispatch(updateCart({ product, quantity: newQuantity }));
     navigate("/cart");
   };
 
@@ -40,7 +33,7 @@ const Cart = () => {
           return (
             <li key={lineItem.id}>
               {lineItem.product.name} - {lineItem.quantity}
-              <button onClick={(ev) => deleteLineItem(lineItem)}>-1</button>
+              <button onClick={(ev) => deleteLineItem(lineItem)}>x</button>
             </li>
           );
         })}

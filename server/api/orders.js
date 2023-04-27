@@ -39,13 +39,3 @@ app.put("/cart", async (req, res, next) => {
     next(ex);
   }
 });
-
-// app.delete("/cart/:id/lineItems/:id", async (req, res, next) => {
-//   try {
-//     const lineItem = await LineItem.findByPk(req.params.id);
-//     res.send(await LineItem.destroy());
-//     res.sendStatus(204);
-//   } catch (ex) {
-//     next(ex);
-//   }
-// });
