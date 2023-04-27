@@ -13,10 +13,9 @@ const Products = () => {
     dispatch(fetchProducts());
   }, []);
 
-  // needs testing
   const createLineItem = async (product) => {
     await dispatch(createItem({ product, quantity: 1 }));
-    navigate("/");
+    navigate("/cart");
   };
 
   return (

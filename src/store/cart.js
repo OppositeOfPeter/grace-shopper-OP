@@ -5,8 +5,9 @@ const cart = (state = { lineItems: [] }, action) => {
   }
   if (action.type === "CREATE_ITEM") {
     state = { lineItems: [...state.lineItems, action.lineItems] };
+    return action.cart ? action.cart : null;
   }
-  if (action.type === "UPDATE_CART") {
+  if (action.type === "DELETE_ITEM") {
     return action.cart;
   }
   return state;
@@ -24,19 +25,19 @@ export const fetchCart = () => {
   };
 };
 
-export const createItem = (product) => {
+export const createItem = (cart) => {
   const token = window.localStorage.getItem("token");
   return async (dispatch) => {
-    const response = await axios.post("/api/orders/cart", product, {
+    const response = await axios.post("/api/orders/cart", cart, {
       headers: {
         authorization: token,
       },
     });
-    dispatch({ type: "CREATE_ITEM", product: response.data });
+    dispatch({ type: "CREATE_ITEM", cart: response.data });
   };
 };
 
-export const updateCart = (cart) => {
+export const deleteItem = (cart) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
     const response = await axios.put("/api/orders/cart", cart, {
@@ -44,7 +45,7 @@ export const updateCart = (cart) => {
         authorization: token,
       },
     });
-    dispatch({ type: "UPDATE_CART", cart: response.data });
+    dispatch({ type: "DELETE_ITEM", cart: response.data });
   };
 };
 
