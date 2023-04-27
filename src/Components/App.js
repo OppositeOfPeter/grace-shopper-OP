@@ -3,14 +3,15 @@ import Home from './Home';
 import Login from './Login';
 import Cart from './Cart';
 import ProductsList from './ProductList'; //NR
-import CreateAccount from './CreateAccount';
+import Profile from './Profile';
 import { useSelector, useDispatch } from 'react-redux';
-import { loginWithToken, fetchCart, fetchProducts } from '../store';
+import { loginWithToken, fetchCart, fetchProducts, fetchUsers } from '../store';
 import { Link, Routes, Route } from 'react-router-dom';
 
 const App = () => {
 	const { auth } = useSelector((state) => state);
 	const dispatch = useDispatch();
+	
 	useEffect(() => {
 		dispatch(loginWithToken());
 	}, []);
@@ -20,24 +21,30 @@ const App = () => {
 			dispatch(fetchCart());
 		}
 	}, [auth]);
+
+    
 	return (
 		<div>
 			<h1>Acme Shopping</h1>
 			{auth.id ? <Home /> : <Login />}
-      {<ProductsList />}
+      
 			{!!auth.id && (
 				<div>
 					<nav>
 						<Link to="/">Home</Link>
 						<Link to="/cart">Cart</Link>
+						<Link to="/profile">Profile</Link>
 					</nav>
 					<Routes>
 						<Route path="/cart" element={<Cart />} />
+						<Route path="/profile" element={<Profile />} />
 					</Routes>
 				</div>
 			)}
+			{<ProductsList />}
 		</div>
 	);
 };
+
 
 export default App;

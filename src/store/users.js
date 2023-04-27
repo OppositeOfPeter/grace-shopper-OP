@@ -41,7 +41,7 @@ export const createUser = (user)=> {
     dispatch({ type: 'CREATE_USER', user: res.data});
   };
 };
-/*
+
 export const deleteUser = (user)=> {
   return async(dispatch)=> {
     await axios.delete(`/api/users/${user.id}`);
@@ -55,6 +55,6 @@ export const updateUser = (user)=> {
     dispatch({ type: 'UPDATE_USER', user: res.data});
   };
 };
-*/
+
 
 export default users;

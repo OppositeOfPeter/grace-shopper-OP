@@ -1,4 +1,6 @@
 import axios from 'axios';
+
+
 const auth = (state = { }, action)=> {
   if(action.type === 'SET_AUTH'){
     return action.auth;
@@ -6,11 +8,11 @@ const auth = (state = { }, action)=> {
   return state;
 };
 
+
 export const logout = ()=> {
   window.localStorage.removeItem('token');
   return { type: 'SET_AUTH', auth: {} };
 };
-
 
 export const loginWithToken = ()=> {
   return async(dispatch)=> {
@@ -33,5 +35,6 @@ export const attemptLogin = (credentials)=> {
     dispatch(loginWithToken());
   };
 };
+
 
 export default auth;
