@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteItem, logout, updateCart } from "../store";
+import { deleteItem, fetchCart, logout, updateCart } from "../store";
 import { Link, useNavigate } from "react-router-dom";
 
 const Cart = () => {
@@ -10,17 +10,13 @@ const Cart = () => {
 
   const lineItems = cart.lineItems;
 
-  // needs testing
-  // const createLineItem = async (ev) => {
-  //   ev.preventDefault();
-  //   await dispatch(createItem({ quantity, productId }));
-  //   navigate("/cart");
-  // };
+  useEffect(() => {
+    dispatch(fetchCart());
+  }, []);
 
   const deleteLineItem = async (lineItem) => {
     const product = lineItem.product;
-    const newQuantity = lineItem.quantity - 1;
-    dispatch(updateCart({ product, quantity: newQuantity }));
+    dispatch(updateCart({ product, quantityToRemove: 1 }));
     navigate("/cart");
   };
 
@@ -30,12 +26,15 @@ const Cart = () => {
       <pre>{JSON.stringify(cart, null, 2)}</pre>
       <ul>
         {lineItems.map((lineItem) => {
-          return (
+          return lineItem ? (
             <li key={lineItem.id}>
-              {lineItem.product.name} - {lineItem.quantity}
-              <button onClick={(ev) => deleteLineItem(lineItem)}>x</button>
+              {lineItem.product.title} - {lineItem.quantity}
+              <button onClick={() => deleteLineItem(lineItem)}>
+                {" "}
+                remove 1 from cart
+              </button>
             </li>
-          );
+          ) : null;
         })}
       </ul>
     </div>
