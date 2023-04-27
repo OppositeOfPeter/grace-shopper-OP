@@ -23,7 +23,7 @@ app.post('/', async(req, res, next) => {
   }
 });
 
-/*
+
 app.delete('/:id', async(req, res, next) => {
   try{
     const user = await User.findByPk(req.params.id);
@@ -44,7 +44,7 @@ app.put('/:id', async(req, res, next) => {
     next(ex);
   }
 });
-*/
+
 
 module.exports = app;
 
