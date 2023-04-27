@@ -1,21 +1,25 @@
-const conn = require('../conn');
+const conn = require("../conn");
 const { STRING, BOOLEAN, UUID, UUIDV4 } = conn.Sequelize;
 
-const Order = conn.define('order', {
-	id: {
-		type: UUID,
-		primaryKey: true,
-		defaultValue: UUIDV4,
-	},
-	isCart: {
-		type: BOOLEAN,
-		defaultValue: true,
-		allowNull: false,
-	},
-	userId: {
-		type: UUID,
-		allowNull: false,
-	},
+const Order = conn.define("order", {
+  id: {
+    type: UUID,
+    primaryKey: true,
+    defaultValue: UUIDV4,
+  },
+  isCart: {
+    type: BOOLEAN,
+    defaultValue: true,
+    allowNull: false,
+  },
+  userId: {
+    type: UUID,
+    allowNull: false,
+  },
+  status: {
+    type: BOOLEAN,
+    defaultValue: false,
+  },
 });
 
 module.exports = Order;
