@@ -1,8 +1,6 @@
 const conn = require('../conn');
-const { STRING, UUID, UUIDV4, ENUM, DATEONLY, TEXT } = conn.Sequelize;
+const { STRING, UUID, UUIDV4, ENUM, DATEONLY, TEXT, DECIMAL } = conn.Sequelize;
 // Products = Books
-// Do we want a separate folder ./db/models for all the models?
-
 const Product = conn.define('product', {
 	id: {
 		type: UUID,
@@ -37,6 +35,12 @@ const Product = conn.define('product', {
 	description: {
 		type: TEXT,
 		allowNull: true,
+	},
+	price: {
+		type: DECIMAL(8, 2),
+		validate: {
+			min: 0.0,
+		},
 	},
 	imageUrl: {
 		type: STRING,
