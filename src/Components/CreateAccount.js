@@ -1,30 +1,38 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { createUser } from '../store';
+import { register } from '../store';
+import { useNavigate } from 'react-router-dom';
+//import { attemptLogin } from '../store';
 
+//User is being create but not logged in, trying to figure out 
+//what to do with the user after created
 
 const CreateAccount = ()=> {
-    
+  
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ errors, setErrors ] = useState([]);
 
-
-  const create = async(ev) => {
-    ev.preventDefault();
-      try{
-        console.log({ username, password });
-        await dispatch(createUser({ username, password }));
-        setUsername('');
-        setPassword('');
-        setErrors([]);
-      }
-      catch(ex) {
-        setErrors(ex.response.data.error.errors); 
-      }
-    };
   
+  const registerUser = async(ev)=> {
+    ev.preventDefault();
+    const credentials = {
+      username,
+      password
+    };
+
+    try {
+      await dispatch(register(credentials));
+      setErrors([]);
+      //navigate('/profile');
+    }
+    catch(ex){
+      setErrors(ex.response.data.error.errors); 
+    }
+
+  };
   
   return (
     <div>
@@ -34,7 +42,7 @@ const CreateAccount = ()=> {
         <p>Register below:</p>
       </div>
       <div>
-        <form onSubmit={ create }>
+        <form onSubmit={ registerUser }>
           <label>Username:</label>
           <input value={ username } onChange={ ev => setUsername(ev.target.value)} />
           <label>Password:</label>
@@ -55,8 +63,8 @@ const CreateAccount = ()=> {
       </div>
     </div>
   );
-  
 };
+
 
 export default CreateAccount;
 
