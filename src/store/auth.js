@@ -1,4 +1,6 @@
 import axios from 'axios';
+
+
 const auth = (state = { }, action)=> {
   if(action.type === 'SET_AUTH'){
     return action.auth;
@@ -6,11 +8,11 @@ const auth = (state = { }, action)=> {
   return state;
 };
 
+
 export const logout = ()=> {
   window.localStorage.removeItem('token');
   return { type: 'SET_AUTH', auth: {} };
 };
-
 
 export const loginWithToken = ()=> {
   return async(dispatch)=> {
@@ -33,5 +35,27 @@ export const attemptLogin = (credentials)=> {
     dispatch(loginWithToken());
   };
 };
+
+// update user once signed in 
+export const updateAuth = (auth)=> {
+  return async(dispatch)=> {
+    const token = window.localStorage.getItem('token');
+    const response = await axios.put(`/api/auth/${token}`, auth);
+    dispatch({ type: 'SET_AUTH', auth: response.data });
+  };
+};
+
+
+// creates and authenticates user
+export const register = (credentials)=> {
+  return async(dispatch)=> {
+    const response = await axios.post('/api/auth/register', credentials);
+    const token = response.data.token;
+    window.localStorage.setItem('token', token);
+    dispatch(loginWithToken());
+  };
+  
+};
+
 
 export default auth;

@@ -1,30 +1,38 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { createUser } from '../store';
+import { useDispatch } from 'react-redux';
+import { register } from '../store';
+import { useNavigate } from 'react-router-dom';
+//import { attemptLogin } from '../store';
+
+//User is being create but not logged in, trying to figure out 
+//what to do with the user after created
 
 const CreateAccount = ()=> {
-    
+  
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ errors, setErrors ] = useState([]);
-  const { users } = useSelector(state => state);
 
-
-  const create = async(ev) => {
-    ev.preventDefault();
-      try{
-        console.log({ username, password });
-        await dispatch(createUser({ username, password }));
-        setUsername('');
-        setPassword('');
-        setErrors([]);
-      }
-      catch(ex) {
-        setErrors(ex.response.data.error.errors); 
-      }
-    };
   
+  const registerUser = async(ev)=> {
+    ev.preventDefault();
+    const credentials = {
+      username,
+      password
+    };
+
+    try {
+      await dispatch(register(credentials));
+      setErrors([]);
+      //navigate('/profile');
+    }
+    catch(ex){
+      setErrors(ex.response.data.error.errors); 
+    }
+
+  };
   
   return (
     <div>
@@ -34,7 +42,7 @@ const CreateAccount = ()=> {
         <p>Register below:</p>
       </div>
       <div>
-        <form onSubmit={ create }>
+        <form onSubmit={ registerUser }>
           <label>Username:</label>
           <input value={ username } onChange={ ev => setUsername(ev.target.value)} />
           <label>Password:</label>
@@ -55,62 +63,9 @@ const CreateAccount = ()=> {
       </div>
     </div>
   );
-  
 };
+
 
 export default CreateAccount;
 
 
-
-
- 
- 
-  /*
-  
-
-  return (
-    
-    <form onSubmit={ create }>
-        <div className="form-group">
-          <label>First Name:</label>
-          <input className="form-control" value={ firstName } onChange={ ev => setFirstName(ev.target.value)} />
-        </div>
-        <div className="form-group">
-          <label>Last Name:</label>
-          <input className="form-control" value={ lastName } onChange={ ev => setLastName(ev.target.value)} />
-        </div>
-        <div className="form-group">
-          <label>Email:</label>
-          <input className="form-control" value={ email } onChange={ ev => setEmail(ev.target.value)} />
-        </div>
-        <div className="needsSpace">
-          <label>School: </label>
-            <select value= { schoolId } onChange={ ev => setSchoolId(ev.target.value)}>
-              <option value=''>Not Enrolled</option> 
-                { 
-                  schools.map( school => {
-                    return (
-                      <option value={ school.id } key={school.id}>{school.name}</option>
-                    );
-                  })
-                }
-            </select>
-        </div>
-        <button className= "btn btn-outline-dark btn-sm" >Create Student</button>
-        <ul>
-          {
-            errors.map( (error, idx) => {
-              return (
-                <li key={ idx }>
-                  { error.message }
-                </li>
-              );
-            })
-          }
-        </ul>
-    </form> 
-      
-  );  
-    
-};
-*/
