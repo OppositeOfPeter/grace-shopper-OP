@@ -21,11 +21,7 @@ const Cart = () => {
     await dispatch(createItem({ product, quantity: 1 }));
     navigate("/cart");
   };
-  
-  const createOrderFromCart = async() => {
-    await dispatch(createOrder());
-    navigate("/cart");
-  };
+
 
   return (
     <div>
