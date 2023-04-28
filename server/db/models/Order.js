@@ -7,6 +7,7 @@ const Order = conn.define("order", {
     primaryKey: true,
     defaultValue: UUIDV4,
   },
+  // if isCart false = order
   isCart: {
     type: BOOLEAN,
     defaultValue: true,
@@ -16,7 +17,7 @@ const Order = conn.define("order", {
     type: UUID,
     allowNull: false,
   },
-  status: {
+  orderStatus: {
     type: BOOLEAN,
     defaultValue: false,
   },
