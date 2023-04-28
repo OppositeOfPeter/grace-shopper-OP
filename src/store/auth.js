@@ -36,5 +36,26 @@ export const attemptLogin = (credentials)=> {
   };
 };
 
+// update user once signed in 
+export const updateAuth = (auth)=> {
+  return async(dispatch)=> {
+    const token = window.localStorage.getItem('token');
+    const response = await axios.put(`/api/auth/${token}`, auth);
+    dispatch({ type: 'SET_AUTH', auth: response.data });
+  };
+};
+
+
+// creates and authenticates user
+export const register = (credentials)=> {
+  return async(dispatch)=> {
+    const response = await axios.post('/api/auth/register', credentials);
+    const token = response.data.token;
+    window.localStorage.setItem('token', token);
+    dispatch(loginWithToken());
+  };
+  
+};
+
 
 export default auth;

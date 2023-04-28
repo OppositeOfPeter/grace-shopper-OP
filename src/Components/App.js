@@ -5,10 +5,12 @@ import Cart from './Cart';
 import ProductsList from './ProductList'; //NR
 import Profile from './Profile';
 import { useSelector, useDispatch } from 'react-redux';
-import { loginWithToken, fetchCart, fetchProducts, fetchUsers } from '../store';
+import { loginWithToken, fetchCart, fetchProducts } from '../store';
 import { Link, Routes, Route } from 'react-router-dom';
 
+
 const App = () => {
+	
 	const { auth } = useSelector((state) => state);
 	const dispatch = useDispatch();
 	
@@ -22,7 +24,6 @@ const App = () => {
 		}
 	}, [auth]);
 
-    
 	return (
 		<div>
 			<h1>Acme Shopping</h1>
