@@ -20,7 +20,7 @@ const CreateOrder = () => {
 
   return (
       <div>
-        <button onClick={() => createOrderFromCart(cart)}>
+        <button onClick={() => createOrderFromCart()}>
           Create Order
         </button>
       </div>
