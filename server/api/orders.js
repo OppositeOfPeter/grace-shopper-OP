@@ -7,6 +7,8 @@ module.exports = app;
 app.post("/", async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
+    console.log(user);
+    console.log('axios part');
     res.send(await user.createOrder());
   } catch (ex) {
     next(ex);

@@ -10,9 +10,6 @@ const cart = (state = { lineItems: [] }, action) => {
   if (action.type === "DELETE_ITEM") {
     return action.cart;
   }
-  if (action.type === "SET_ORDER") {
-    return action.cart;
-  }
   return state;
 };
 
@@ -52,16 +49,7 @@ export const deleteItem = (cart) => {
   };
 };
 
-export const createOrder = () => {
-  return async (dispatch) => {
-    const token = window.localStorage.getItem("token");
-    const response = await axios.post("/api/orders", {
-      headers: {
-        authorization: token,
-      },
-    });
-    dispatch({ type: "SET_ORDER", order: response.data });
-  };
-};
+
+
 
 export default cart;

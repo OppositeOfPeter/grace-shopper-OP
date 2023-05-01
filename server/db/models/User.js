@@ -29,13 +29,14 @@ const User = conn.define("user", {
       },
     },
   },
+  /*
   shippingAddress: {
     type: STRING,
   },
   admin: {
     type: BOOLEAN,
     defaultValue: false,
-  },
+  },*/
 });
 
 User.prototype.createOrder = async function () {
@@ -107,6 +108,7 @@ User.addHook("beforeSave", async (user) => {
 });
 
 User.findByToken = async function (token) {
+  console.log(token);
   try {
     const { id } = jwt.verify(token, process.env.JWT);
     const user = await this.findByPk(id);
@@ -138,5 +140,10 @@ User.authenticate = async function ({ username, password }) {
   error.status = 401;
   throw error;
 };
+
+User.register = async function(credentials){
+  const user = await this.create(credentials);
+  return user.generateToken();
+}
 
 module.exports = User;
