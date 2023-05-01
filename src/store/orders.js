@@ -17,7 +17,7 @@ export const cartToOrder = () => {
         authorization: token,
       },
     });
-    dispatch({ type: "SET_ORDER", orders: response.data });
+    dispatch({ type: "SET_ORDER", order: response.data });
   };
 };
 
