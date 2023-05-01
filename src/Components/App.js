@@ -26,15 +26,7 @@ const App = () => {
     dispatch(loginWithToken());
   }, []);
 
-  useEffect(() => {
-    if (auth.id) {
-      dispatch(fetchCart());
-      dispatch(fetchOrders());
 	const prevAuth = useRef({});
-	
-	useEffect(() => {
-		dispatch(loginWithToken());
-	}, []);
 
 	/*useEffect(() => {
 		if (auth.id) {
@@ -59,11 +51,6 @@ const App = () => {
   useEffect(()=> {
     prevAuth.current = auth;
   });
-
-      dispatch(fetchProducts());
-      dispatch(fetchReviews());
-    }
-  }, [auth]);
 
   return (
     <div>
