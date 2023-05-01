@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchCart, logout, deleteItem, createItem } from "../store";
-import { Link, useNavigate } from "react-router-dom";
-import CreateOrder from "./CreateOrder";
-
+import { deleteItem, createItem, createOrder } from "../store";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const { cart } = useSelector((state) => state);
@@ -23,7 +21,11 @@ const Cart = () => {
     await dispatch(createItem({ product, quantity: 1 }));
     navigate("/cart");
   };
-  
+
+  const createOrderFromCart = async (cart) => {
+    await dispatch(createOrder(cart));
+    navigate("/orders");
+  };
 
   return (
     <div>
@@ -48,7 +50,7 @@ const Cart = () => {
         })}
       </ul>
       <div>
-        <CreateOrder />
+        <button onClick={() => createOrderFromCart(cart)}>Create Order</button>
       </div>
     </div>
   );

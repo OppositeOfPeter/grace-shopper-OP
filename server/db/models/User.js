@@ -46,6 +46,23 @@ User.prototype.createOrder = async function () {
   return cart;
 };
 
+// need to test - should be successful - AG
+User.prototype.getOrders = async function () {
+  let orders = await conn.models.order.findAll({
+    where: {
+      userId: this.id,
+      isCart: false,
+    },
+    include: [
+      {
+        model: conn.models.lineItem,
+        include: [conn.models.product],
+      },
+    ],
+  });
+  return orders;
+};
+
 User.prototype.getCart = async function () {
   let cart = await conn.models.order.findOne({
     where: {
