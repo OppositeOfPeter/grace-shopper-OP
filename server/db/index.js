@@ -3,13 +3,19 @@ const User = require('./models/User');
 const Product = require('./models/Product');
 const Order = require('./models/Order');
 const LineItem = require('./models/LineItem');
-// Importing products data from ProductData.js...NR
 const products = require('./ProductData');
+const Review = require('./models/Review')
+
 
 Order.belongsTo(User);
 LineItem.belongsTo(Order);
 Order.hasMany(LineItem);
+Review.belongsTo(User);
+User.hasMany(Review);
+Review.belongsTo(Product);
+Product.hasMany(Review);
 LineItem.belongsTo(Product);
+
 
 const syncAndSeed = async () => {
 	await conn.sync({ force: true });
