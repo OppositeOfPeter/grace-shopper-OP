@@ -33,7 +33,11 @@ const Orders = () => {
         {orders.length > 0
           ? orders.map((order) => {
               if (order.orderStatus) {
-                return <li key={order.id}>{order.id}</li>;
+                return (
+                  <li key={order.id}>
+                    <Link to={`/orders/${order.id}`}>{order.id}</Link>
+                  </li>
+                );
               }
             })
           : "no completed orders yet!"}

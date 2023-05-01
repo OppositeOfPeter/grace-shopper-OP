@@ -45,7 +45,7 @@ User.prototype.createOrder = async function () {
   return cart;
 };
 
-// need to test
+// need to test - should be successful - AG
 User.prototype.getOrders = async function () {
   let orders = await conn.models.order.findAll({
     where: {
