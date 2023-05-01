@@ -17,10 +17,12 @@ const Order = conn.define("order", {
     type: UUID,
     allowNull: false,
   },
+  // false = in-progress
   orderStatus: {
     type: BOOLEAN,
     defaultValue: false,
   },
 });
+
 
 module.exports = Order;

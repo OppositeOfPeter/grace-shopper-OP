@@ -4,17 +4,12 @@ import Login from "./Login";
 import Cart from "./Cart";
 import ProductsList from "./ProductList"; //NR
 import Profile from "./Profile";
+import Orders from "./Orders";
 import Order from "./Order";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  loginWithToken,
-  fetchCart,
-  fetchProducts,
-  fetchUsers,
-  fetchOrders,
-} from "../store";
-import { Link, Routes, Route } from "react-router-dom";
 
+import { useSelector, useDispatch } from "react-redux";
+import { loginWithToken, fetchCart, fetchOrders } from "../store";
+import { Link, Routes, Route } from "react-router-dom";
 
 const App = () => {
   const { auth } = useSelector((state) => state);
@@ -27,7 +22,7 @@ const App = () => {
   useEffect(() => {
     if (auth.id) {
       dispatch(fetchCart());
-      //   dispatch(fetchOrders());
+      dispatch(fetchOrders());
     }
   }, [auth]);
 
@@ -47,7 +42,8 @@ const App = () => {
           <Routes>
             <Route path="/cart" element={<Cart />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/orders" element={<Order />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/orders/:id" element={<Order />} />
           </Routes>
         </div>
       )}
