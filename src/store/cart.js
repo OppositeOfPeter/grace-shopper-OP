@@ -1,4 +1,5 @@
 import axios from "axios";
+
 const cart = (state = { lineItems: [] }, action) => {
   if (action.type === "SET_CART") {
     return action.cart;
@@ -10,10 +11,30 @@ const cart = (state = { lineItems: [] }, action) => {
   if (action.type === "DELETE_ITEM") {
     return action.cart;
   }
-  if (action.type === "SET_ORDER") {
-    return action.cart;
+
+  return state;
+};
+
+export const orders = (state = [], action) => {
+  if (action.type === "CREATE_ORDER") {
+    return action.order;
+  }
+  if (action.type === "FETCH_ORDERS") {
+    return action.orders;
   }
   return state;
+};
+
+export const fetchOrders = () => {
+  return async (dispatch) => {
+    const token = window.localStorage.getItem("token");
+    const response = await axios.get("/api/orders", {
+      headers: {
+        authorization: token,
+      },
+    });
+    dispatch({ type: "FETCH_ORDERS", orders: response.data });
+  };
 };
 
 export const fetchCart = () => {
@@ -52,15 +73,15 @@ export const deleteItem = (cart) => {
   };
 };
 
-export const createOrder = () => {
+export const createOrder = (order) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
-    const response = await axios.post("/api/orders", {
+    const response = await axios.post("/api/orders", order, {
       headers: {
         authorization: token,
       },
     });
-    dispatch({ type: "SET_ORDER", order: response.data });
+    dispatch({ type: "CREATE_ORDER", order: response.data });
   };
 };
 
