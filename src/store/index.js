@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 import auth from './auth';
-import cart from './cart';
+import cart, { orders }  from './cart';
 import products from './products';
 import reviews from './reviews';
 
