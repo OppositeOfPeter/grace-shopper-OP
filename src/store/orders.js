@@ -1,25 +1,40 @@
 import axios from "axios";
 
-const orders = (state = { lineItems: [] }, action) => {
-  if (action.type === "SET_ORDER") {
+
+const orders = (state = [], action) => {
+  if (action.type === "CREATE_ORDER") {
     return action.order;
+  }
+  if (action.type === "FETCH_ORDERS") {
+    return action.orders;
   }
   return state;
 };
 
 
-export const cartToOrder = () => {
+export const fetchOrders = () => {
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
-    console.log(token);
-    const response = await axios.post("/api/orders", {
+    const response = await axios.get("/api/orders", {
       headers: {
         authorization: token,
       },
     });
-    dispatch({ type: "SET_ORDER", order: response.data });
+    dispatch({ type: "FETCH_ORDERS", orders: response.data });
   };
 };
 
+
+export const createOrder = (order) => {
+  return async (dispatch) => {
+    const token = window.localStorage.getItem("token");
+    const response = await axios.post("/api/orders", order, {
+      headers: {
+        authorization: token,
+      },
+    });
+    dispatch({ type: "CREATE_ORDER", order: response.data });
+  };
+};
 
 export default orders;

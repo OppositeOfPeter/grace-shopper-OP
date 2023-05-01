@@ -11,33 +11,8 @@ const cart = (state = { lineItems: [] }, action) => {
   if (action.type === "DELETE_ITEM") {
     return action.cart;
   }
-<<<<<<< HEAD
-=======
 
   return state;
-};
-
-export const orders = (state = [], action) => {
-  if (action.type === "CREATE_ORDER") {
-    return action.order;
-  }
-  if (action.type === "FETCH_ORDERS") {
-    return action.orders;
-  }
->>>>>>> 3d3768adeea9d082b6540e1b1c5860687ac8ac0d
-  return state;
-};
-
-export const fetchOrders = () => {
-  return async (dispatch) => {
-    const token = window.localStorage.getItem("token");
-    const response = await axios.get("/api/orders", {
-      headers: {
-        authorization: token,
-      },
-    });
-    dispatch({ type: "FETCH_ORDERS", orders: response.data });
-  };
 };
 
 export const fetchCart = () => {
