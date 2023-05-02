@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Home from "./Home";
 import Login from "./Login";
 import Cart from "./Cart";
@@ -26,15 +26,31 @@ const App = () => {
     dispatch(loginWithToken());
   }, []);
 
-  useEffect(() => {
-    if (auth.id) {
-      dispatch(fetchCart());
-      dispatch(fetchOrders());
+	const prevAuth = useRef({});
 
-      dispatch(fetchProducts());
-      dispatch(fetchReviews());
-    }
-  }, [auth]);
+	/*useEffect(() => {
+		if (auth.id) {
+			dispatch(fetchCart());
+			dispatch(fetchProducts());
+			dispatch(fetchReviews());
+		}
+	}, [auth]);*/
+	
+    useEffect(()=> {
+      if(!prevAuth.current.id && auth.id){
+        console.log('logged in');
+        dispatch(fetchCart());
+        dispatch(fetchProducts());
+			  dispatch(fetchReviews());
+      }
+      if(prevAuth.current.id && !auth.id){
+        console.log('logged out');
+      }
+    }, [auth]);
+
+  useEffect(()=> {
+    prevAuth.current = auth;
+  });
 
   return (
     <div>
