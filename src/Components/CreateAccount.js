@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { register } from '../store';
 import { useNavigate } from 'react-router-dom';
-//import { attemptLogin } from '../store';
+import { attemptLogin } from '../store';
 
-//User is being create but not logged in, trying to figure out 
-//what to do with the user after created
 
 const CreateAccount = ()=> {
   
@@ -26,7 +24,8 @@ const CreateAccount = ()=> {
     try {
       await dispatch(register(credentials));
       setErrors([]);
-      //navigate('/profile');
+      dispatch(attemptLogin(credentials));
+      navigate('/profile');
     }
     catch(ex){
       setErrors(ex.response.data.error.errors); 

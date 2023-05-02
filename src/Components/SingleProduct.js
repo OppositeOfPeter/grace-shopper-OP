@@ -17,11 +17,11 @@ const SingleProduct = () => {
 	const { id } = useParams();
 	const { products, reviews, auth } = useSelector((state) => state);
 
-	const product = products.find((product) => product.id === id);
+  const product = products.find((product) => product.id === id);
 
-	if (!product) {
-		return null;
-	}
+  if (!product) {
+    return null;
+  }
 
 	// only show reviews for the product that is currently being viewed
 	const productReviews = reviews.filter(
@@ -36,13 +36,13 @@ const SingleProduct = () => {
 
 	// Fetch the reviews for this product when the component mounts.
 
-	const createLineItem = async (product) => {
-		await dispatch(createItem({ product, quantity: 1 }));
-		navigate('/cart');
-	};
+  const createLineItem = async (product) => {
+    await dispatch(createItem({ product, quantity: 1 }));
+    navigate("/cart");
+  };
 
-	console.log('products: ', products);
-	console.log('product: ', product);
+  console.log("products: ", products);
+  console.log("product: ", product);
 
 	return (
 		<div>

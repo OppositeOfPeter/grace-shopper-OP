@@ -1,35 +1,52 @@
-import React, { useEffect } from 'react';
-import Home from './Home';
-import Login from './Login';
-import Cart from './Cart';
-import ProductsList from './ProductList';
-import SingleProduct from './SingleProduct';
-import Reviews from './Reviews.js'; // not sure if this is needed
-import Profile from './Profile';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useRef } from "react";
+import Home from "./Home";
+import Login from "./Login";
+import Cart from "./Cart";
+import ProductsList from "./ProductList";
+import SingleProduct from "./SingleProduct";
+import Orders from "./Orders";
+import Order from "./Order";
+import Reviews from "./Reviews.js"; // not sure if this is needed
+import Profile from "./Profile";
+import { useSelector, useDispatch } from "react-redux";
 import {
-	loginWithToken,
-	fetchCart,
-	fetchProducts,
-	fetchReviews,
-} from '../store';
-import { Link, Routes, Route } from 'react-router-dom';
+  loginWithToken,
+  fetchCart,
+  fetchProducts,
+  fetchReviews,
+  fetchOrders,
+} from "../store";
+import { Link, Routes, Route } from "react-router-dom";
 
 const App = () => {
-	const { auth } = useSelector((state) => state);
-	const dispatch = useDispatch();
+  const { auth } = useSelector((state) => state);
+  const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(loginWithToken());
-		dispatch(fetchProducts());
-	}, []);
+  useEffect(() => {
+    dispatch(loginWithToken());
+	dispatch(fetchProducts())
+  }, []);
 
-	useEffect(() => {
+	const prevAuth = useRef({});
+
+	/*useEffect(() => {
 		if (auth.id) {
 			dispatch(fetchCart());
 			dispatch(fetchReviews());
 		}
-	}, [auth]);
+	}, [auth]);*/
+	
+    useEffect(()=> {
+      if(!prevAuth.current.id && auth.id){
+        console.log('logged in');
+        dispatch(fetchCart());
+        dispatch(fetchProducts());
+			  dispatch(fetchReviews());
+      }
+      if(prevAuth.current.id && !auth.id){
+        console.log('logged out');
+      }
+    }, [auth]);
 
 	return (
 		<div>

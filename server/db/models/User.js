@@ -29,13 +29,14 @@ const User = conn.define("user", {
       },
     },
   },
+  /*
   shippingAddress: {
     type: STRING,
   },
   admin: {
     type: BOOLEAN,
     defaultValue: false,
-  },
+  },*/
 });
 
 User.prototype.createOrder = async function () {
@@ -43,6 +44,23 @@ User.prototype.createOrder = async function () {
   cart.isCart = false;
   await cart.save();
   return cart;
+};
+
+// need to test - should be successful - AG
+User.prototype.getOrders = async function () {
+  let orders = await conn.models.order.findAll({
+    where: {
+      userId: this.id,
+      isCart: false,
+    },
+    include: [
+      {
+        model: conn.models.lineItem,
+        include: [conn.models.product],
+      },
+    ],
+  });
+  return orders;
 };
 
 User.prototype.getCart = async function () {
@@ -107,6 +125,7 @@ User.addHook("beforeSave", async (user) => {
 });
 
 User.findByToken = async function (token) {
+  console.log(token);
   try {
     const { id } = jwt.verify(token, process.env.JWT);
     const user = await this.findByPk(id);
@@ -138,5 +157,10 @@ User.authenticate = async function ({ username, password }) {
   error.status = 401;
   throw error;
 };
+
+User.register = async function(credentials){
+  const user = await this.create(credentials);
+  return user.generateToken();
+}
 
 module.exports = User;
