@@ -1,17 +1,23 @@
 body {
-  font-family: verdana;
+	font-family: verdana;
 }
 
 form {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 form > * {
-  margin: 1rem;
+	margin: 1rem;
 }
 
 nav {
-  display: flex;
-  justify-content: space-around;
+	display: flex;
+	justify-content: space-around;
+}
+
+img,
+#cover-image {
+	width: 150px;
+	border-radius: 5px;
 }
