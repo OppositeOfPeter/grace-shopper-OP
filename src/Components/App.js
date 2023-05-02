@@ -23,6 +23,8 @@ const App = () => {
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
 
+  console.log(auth);
+
   useEffect(() => {
     dispatch(loginWithToken());
     dispatch(fetchProducts());
@@ -60,6 +62,7 @@ const App = () => {
             <Link to="/cart">Cart</Link>
             {!!auth.id && <Link to="/profile">Profile</Link>}
             <Link to="/products">Products</Link>
+            <Link to="/orders">Orders</Link>
           </nav>
           <Routes>
             <Route path="/" element={<ProductsList />} />
@@ -68,7 +71,11 @@ const App = () => {
             <Route path="/products" element={<ProductsList />} />
             <Route path="/products/:id" element={<SingleProduct />} />
             <Route path="/products/:id/reviews" element={<Reviews />} />
-            <Route path="/products/addproduct" element={<AddProduct />} />
+            {!!auth.id && auth.admin && (
+              <Route path="/products/addproduct" element={<AddProduct />} />
+            )}
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/orders/:id" element={<Order />} />
           </Routes>
         </div>
       }
