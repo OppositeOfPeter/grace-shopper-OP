@@ -4,7 +4,7 @@ import Login from './Login';
 import Cart from './Cart';
 import ProductsList from './ProductList';
 import SingleProduct from './SingleProduct';
-import Reviews from './Reviews'; // not sure if this is needed
+import Reviews from './Reviews.js'; // not sure if this is needed
 import Profile from './Profile';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -21,12 +21,12 @@ const App = () => {
 
 	useEffect(() => {
 		dispatch(loginWithToken());
+		dispatch(fetchProducts());
 	}, []);
 
 	useEffect(() => {
 		if (auth.id) {
 			dispatch(fetchCart());
-			dispatch(fetchProducts());
 			dispatch(fetchReviews());
 		}
 	}, [auth]);
@@ -35,24 +35,24 @@ const App = () => {
 		<div>
 			<h1>Acme Shopping</h1>
 			{auth.id ? <Home /> : <Login />}
-
-			{!!auth.id && (
+			{
 				<div>
 					<nav>
 						<Link to="/">Home</Link>
 						<Link to="/cart">Cart</Link>
-						<Link to="/profile">Profile</Link>
+						{!!auth.id && <Link to="/profile">Profile</Link>}
 						<Link to="/products">Products</Link>
 					</nav>
 					<Routes>
+						<Route path="/" element={<ProductsList />} />
 						<Route path="/cart" element={<Cart />} />
-						<Route path="/profile" element={<Profile />} />
+						{!!auth.id && <Route path="/profile" element={<Profile />} />}
 						<Route path="/products" element={<ProductsList />} />
 						<Route path="/products/:id" element={<SingleProduct />} />
+						<Route path="/products/:id/reviews" element={<Reviews />} />
 					</Routes>
 				</div>
-			)}
-			{<ProductsList />}
+			}
 		</div>
 	);
 };

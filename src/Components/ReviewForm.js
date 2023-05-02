@@ -18,7 +18,7 @@ const ReviewForm = ({ productId }) => {
 
 	return (
 		<form onSubmit={create}>
-			<label htmlFor="title">Title</label>
+			<label htmlFor="title">Leave a Review</label>
 			<input
 				type="text"
 				name="title"
