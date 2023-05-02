@@ -29,14 +29,13 @@ const User = conn.define("user", {
       },
     },
   },
-  /*
-  shippingAddress: {
-    type: STRING,
-  },
+  // shippingAddress: {
+  //   type: STRING,
+  // },
   admin: {
     type: BOOLEAN,
     defaultValue: false,
-  },*/
+  },
 });
 
 User.prototype.createOrder = async function () {
@@ -158,9 +157,9 @@ User.authenticate = async function ({ username, password }) {
   throw error;
 };
 
-User.register = async function(credentials){
+User.register = async function (credentials) {
   const user = await this.create(credentials);
   return user.generateToken();
-}
+};
 
 module.exports = User;
