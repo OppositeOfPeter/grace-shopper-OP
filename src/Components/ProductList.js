@@ -5,12 +5,14 @@ import { fetchProducts } from '../store';
 import { Link, useNavigate } from 'react-router-dom';
 import { createItem } from '../store/cart';
 import SingleProduct from './SingleProduct';
+import SearchBar from './SearchBar';
 
 const Products = ({}) => {
 	const [product, setProduct] = useState(null); 
 	const { products } = useSelector((state) => state);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const [filteredProducts, setFilteredProducts] = useState([]);
 
 	const handleClick = (productId) => {
 		setProduct(productId);
@@ -25,8 +27,32 @@ const Products = ({}) => {
 		await dispatch(createItem({ product, quantity: 1 }));
 		navigate('/cart');
 	};
+	
+	//for the searchbar
+	const handleSearch = (searchTerm) => {
+    const filtered = products.filter((product) =>
+      product.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredProducts(filtered);
+  };
 		
 	return (
+	<div>
+	  <div>
+      <h2>Book Search</h2>
+      <p>Search by Title</p>
+      <SearchBar data={products.map((product) => product.title)} onSearch={handleSearch} />
+      <div>
+        {
+        filteredProducts.map((product) => (
+          <div key={product.id}>
+            <Link to={`/products/${ product.id }`}>
+              { product.title }
+            </Link>
+          </div>
+        ))}
+      </div>
+    </div>
 		<div>
 			<ul>
 				{products.map((product) => {
@@ -54,6 +80,7 @@ const Products = ({}) => {
 				})}
 			</ul>
 			{product && <SingleProduct productId={product} />}
+		</div>
 		</div>
 	);
 };
