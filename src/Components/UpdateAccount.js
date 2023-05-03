@@ -11,14 +11,17 @@ const UpdateAccount = () => {
   const dispatch = useDispatch();
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
-
+  const [ admin, setIsAdmin] = useState(false);
   
   const updateUser = async(ev) => {
     ev.preventDefault();
-    await dispatch(updateAuth({ username, password }));
-    setUsername('');
-    setPassword('');
-    navigate('/profile');
+
+    await dispatch(updateAuth({ username, password, admin}));
+      setUsername('');
+      setPassword('');
+      setIsAdmin(false);
+      
+      navigate('/profile');
   };  
     
   
@@ -38,6 +41,12 @@ const UpdateAccount = () => {
           type="password"
           placeholder="password"
           name="password"
+        />
+        <label htmlFor="admin">Become an admin</label>
+        <input 
+           type="checkbox"
+           checked={ admin }
+           onChange={ev => setIsAdmin(ev.target.checked)}
         />
         <button>Update Account</button>
       </form>
