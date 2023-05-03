@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateAuth } from "../store";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const UpdateAccount = () => {
   const { auth } = useSelector((state) => state);
@@ -15,10 +15,6 @@ const UpdateAccount = () => {
     await dispatch(updateAuth({ username, password }));
     setUsername("");
     setPassword("");
-    navigate("/profile");
-  };
-
-  const addShippingAddress = async (ev) => {
     navigate("/profile");
   };
 
@@ -38,21 +34,7 @@ const UpdateAccount = () => {
         />
         <button>Update Account</button>
       </form>
-      <h2>Add Shipping Address</h2>
-      <form onSubmit={addShippingAddress}>
-        <label>Street Address</label>
-        <input></input>
-        <label>apt</label>
-        <input></input>
-        <label>City</label>
-        <input></input>
-        <label>State</label>
-        <input></input>
-        <label>Zip Code</label>
-        <input></input>
-
-        <button>Add Shipping Address</button>
-      </form>
+      <Link to={"/profile/addaddress"}>Add Shipping Address</Link>
     </div>
   );
 };

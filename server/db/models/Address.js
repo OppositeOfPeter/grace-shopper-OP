@@ -22,8 +22,10 @@ const Address = conn.define("address", {
   city: {
     type: STRING,
     allowNull: false,
-    notEmpty: {
-      msg: "City required",
+    validate: {
+      notEmpty: {
+        msg: "City required",
+      },
     },
   },
   state: {

@@ -62,6 +62,27 @@ User.prototype.getOrders = async function () {
   return orders;
 };
 
+User.prototype.getAddresses = async function () {
+  let addresses = await conn.models.address.findAll({
+    where: {
+      userId: this.id,
+    },
+  });
+  return addresses;
+};
+
+User.prototype.createAddress = async function (_address) {
+  let address = await conn.models.address.create({
+    streetAddress: _address.streetAddress,
+    city: _address.city,
+    apt: _address.apt,
+    state: _address.state,
+    zipCode: _address.zipCode,
+    userId: this.id,
+  });
+  return address;
+};
+
 User.prototype.getCart = async function () {
   let cart = await conn.models.order.findOne({
     where: {

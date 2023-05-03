@@ -25,7 +25,7 @@ app.get("/:id", async (req, res, next) => {
   }
 });
 
-// (api/products/:id)
+// (api/products)
 app.post("/", async (req, res, next) => {
   try {
     res.status(201).send(await Product.create(req.body));

@@ -13,7 +13,6 @@ const addresses = (state = [], action) => {
 export const fetchAddresses = () => {
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
-
     const response = await axios.get("/api/auth/addresses", {
       headers: {
         authorization: token,
@@ -26,7 +25,7 @@ export const fetchAddresses = () => {
 export const createAddress = (address) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
-    await axios.post("/api/auth/addresses", address, {
+    const response = await axios.post("/api/auth/addresses", address, {
       headers: {
         authorization: token,
       },
