@@ -35,13 +35,8 @@ const CreateAccount = ()=> {
   
   return (
     <div>
-      <div>
-        <h2>Create Account</h2>
-        <p>No account? No problem!</p>
-        <p>Register below:</p>
-      </div>
-      <div>
-        <form onSubmit={ registerUser }>
+      <h2>Create Acc<span class="orange-text">o</span>unt</h2>
+      <form onSubmit={ registerUser }>
          <input 
             value={ username } 
             onChange={ ev => setUsername(ev.target.value)} 
@@ -67,8 +62,7 @@ const CreateAccount = ()=> {
               })
             }
           </ul>
-        </form>
-      </div>
+      </form>
     </div>
   );
 };

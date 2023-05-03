@@ -19,9 +19,11 @@ const Login = () => {
     ev.preventDefault();
     dispatch(attemptLogin(credentials));
   };
+  
   return (
     <div>
-      <h2>Login</h2>
+      <div>
+      <h2>L<span class="orange-text">o</span>gin</h2>
       <form onSubmit={login}>
         <input
           placeholder="username"
@@ -38,7 +40,10 @@ const Login = () => {
         />
         <button>Login</button>
       </form>
-      <CreateAccount />
+      </div>
+      <div>
+        <CreateAccount />
+      </div>
     </div>
   );
 };
