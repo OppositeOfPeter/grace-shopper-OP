@@ -16,12 +16,8 @@ const Review = conn.define('review', {
 		allowNull: true,
 	},
 	rating: {
-		type: STRING,
+		type: ENUM('1', '2', '3', '4', '5'),
 		allownull: false,
-		validate: {
-			min: 1,
-			max: 5,
-		},
 	},
 	userId: {
 		type: UUID,
