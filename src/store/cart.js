@@ -4,7 +4,7 @@ const cart = (state = { lineItems: [] }, action) => {
   if (action.type === "SET_CART") {
     return action.cart;
   }
-  if (action.type === "CREATE_ITEM") {
+  if (action.type === "ADD_TO_CART") {
     state = { lineItems: [...state.lineItems, action.lineItems] };
     return action.cart ? action.cart : null;
   }
@@ -27,7 +27,7 @@ export const fetchCart = () => {
   };
 };
 
-export const createItem = (cart) => {
+export const addToCart = (cart) => {
   const token = window.localStorage.getItem("token");
   return async (dispatch) => {
     const response = await axios.post("/api/orders/cart", cart, {
@@ -35,7 +35,7 @@ export const createItem = (cart) => {
         authorization: token,
       },
     });
-    dispatch({ type: "CREATE_ITEM", cart: response.data });
+    dispatch({ type: "ADD_TO_CART", cart: response.data });
   };
 };
 
@@ -50,7 +50,5 @@ export const deleteItem = (cart) => {
     dispatch({ type: "DELETE_ITEM", cart: response.data });
   };
 };
-
-
 
 export default cart;

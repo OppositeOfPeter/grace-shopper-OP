@@ -35,7 +35,7 @@ export const updateProduct = (product) => {
 
 export const createProduct = (product) => {
   return async (dispatch) => {
-    await axios.post("/api/products", product);
+    const response = await axios.post("/api/products", product);
     dispatch({ type: "CREATE_PRODUCT", product: response.data });
   };
 };

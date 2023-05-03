@@ -14,10 +14,11 @@ import {
   fetchCart,
   fetchProducts,
   fetchReviews,
-  fetchOrders,
+  fetchAddresses,
 } from "../store";
 import { Link, Routes, Route } from "react-router-dom";
 import AddProduct from "./AddProduct";
+import AddShippingAddress from "./AddShippingAddress";
 
 const App = () => {
   const { auth } = useSelector((state) => state);
@@ -45,6 +46,7 @@ const App = () => {
       dispatch(fetchCart());
       dispatch(fetchProducts());
       dispatch(fetchReviews());
+      dispatch(fetchAddresses());
     }
     if (prevAuth.current.id && !auth.id) {
       console.log("logged out");
@@ -62,12 +64,21 @@ const App = () => {
             <Link to="/cart">Cart</Link>
             {!!auth.id && <Link to="/profile">Profile</Link>}
             <Link to="/products">Products</Link>
+            {!!auth.id && auth.admin && (
+              <Link to="/products/addproduct">Add Product</Link>
+            )}
             <Link to="/orders">Orders</Link>
           </nav>
           <Routes>
             <Route path="/" element={<ProductsList />} />
             <Route path="/cart" element={<Cart />} />
             {!!auth.id && <Route path="/profile" element={<Profile />} />}
+            {!!auth.id && (
+              <Route
+                path="/profile/addaddress"
+                element={<AddShippingAddress />}
+              />
+            )}
             <Route path="/products" element={<ProductsList />} />
             <Route path="/products/:id" element={<SingleProduct />} />
             <Route path="/products/:id/reviews" element={<Reviews />} />
