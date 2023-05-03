@@ -14,7 +14,7 @@ import {
   fetchCart,
   fetchProducts,
   fetchReviews,
-  fetchOrders,
+  fetchAddresses,
 } from "../store";
 import { Link, Routes, Route } from "react-router-dom";
 import AddProduct from "./AddProduct";
@@ -45,6 +45,7 @@ const App = () => {
       dispatch(fetchCart());
       dispatch(fetchProducts());
       dispatch(fetchReviews());
+      dispatch(fetchAddresses());
     }
     if (prevAuth.current.id && !auth.id) {
       console.log("logged out");

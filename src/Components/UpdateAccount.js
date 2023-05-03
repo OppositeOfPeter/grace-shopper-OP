@@ -40,14 +40,17 @@ const UpdateAccount = () => {
       </form>
       <h2>Add Shipping Address</h2>
       <form onSubmit={addShippingAddress}>
-        <label></label>
+        <label>Street Address</label>
         <input></input>
-        <label></label>
+        <label>apt</label>
         <input></input>
-        <label></label>
+        <label>City</label>
         <input></input>
-        <label></label>
+        <label>State</label>
         <input></input>
+        <label>Zip Code</label>
+        <input></input>
+
         <button>Add Shipping Address</button>
       </form>
     </div>
