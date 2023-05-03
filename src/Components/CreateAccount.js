@@ -42,10 +42,19 @@ const CreateAccount = ()=> {
       </div>
       <div>
         <form onSubmit={ registerUser }>
-          <label>Username:</label>
-          <input value={ username } onChange={ ev => setUsername(ev.target.value)} />
-          <label>Password:</label>
-          <input value={ password } onChange={ ev => setPassword(ev.target.value)} />
+         <input 
+            value={ username } 
+            onChange={ ev => setUsername(ev.target.value)} 
+            placeholder="username"
+            name="username"
+          />
+          <input 
+            value={ password } 
+            onChange={ ev => setPassword(ev.target.value)}          
+            type="password"
+            placeholder="password"
+            name="password" 
+          />
           <button>Create Account</button>
           <ul>
             {

@@ -26,10 +26,19 @@ const UpdateAccount = () => {
     <div>
       <h2>Update Account</h2>
       <form onSubmit={ updateUser }>
-        <label>Username:</label>
-          <input value={ username } onChange={ ev => setUsername(ev.target.value)} />
-        <label>Password:</label>
-          <input value={ password } onChange={ ev => setPassword(ev.target.value)} />
+        <input 
+          value={ username } 
+          onChange={ ev => setUsername(ev.target.value)}
+          placeholder="username"
+          name="username"
+        />
+        <input 
+          value={ password } 
+          onChange={ ev => setPassword(ev.target.value)} 
+          type="password"
+          placeholder="password"
+          name="password"
+        />
         <button>Update Account</button>
       </form>
     </div>
