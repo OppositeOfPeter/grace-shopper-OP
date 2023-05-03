@@ -23,7 +23,7 @@ const Login = () => {
   return (
     <div>
       <div>
-      <h2>L<span class="orange-text">o</span>gin</h2>
+      <h2>L<span className="orange-text">o</span>gin</h2>
       <form onSubmit={login}>
         <input
           placeholder="username"
