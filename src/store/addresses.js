@@ -1,5 +1,4 @@
 import axios from "axios";
-import { response } from "express";
 
 const addresses = (state = [], action) => {
   if (action.type === "SET_ADDRESSES") {
@@ -27,7 +26,6 @@ export const fetchAddresses = () => {
 export const createAddress = (address) => {
   return async (dispatch) => {
     const token = window.localStorage.getItem("token");
-
     await axios.post("/api/auth/addresses", address, {
       headers: {
         authorization: token,

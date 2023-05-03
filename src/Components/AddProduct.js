@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { createProduct } from "../store";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
   const [title, setTitle] = useState("");
@@ -10,8 +12,11 @@ const AddProduct = () => {
   const [price, setPrice] = useState(0.0);
   const [imageURL, setImageURL] = useState("");
 
-  const create = async () => {
-    ev.preventDafault();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const create = async (ev) => {
+    ev.preventDefault();
     await dispatch(
       createProduct({
         title,
@@ -23,6 +28,7 @@ const AddProduct = () => {
         imageURL,
       })
     );
+    navigate("/products");
   };
   return (
     <>

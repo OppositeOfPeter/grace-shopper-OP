@@ -63,6 +63,9 @@ const App = () => {
             <Link to="/cart">Cart</Link>
             {!!auth.id && <Link to="/profile">Profile</Link>}
             <Link to="/products">Products</Link>
+            {!!auth.id && auth.admin && (
+              <Link to="/products/addproduct">Add Product</Link>
+            )}
             <Link to="/orders">Orders</Link>
           </nav>
           <Routes>

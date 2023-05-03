@@ -33,7 +33,7 @@ const syncAndSeed = async () => {
     // Product.create({ name: 'foo' }),
     // Product.create({ name: 'bar' }),
     // Product.create({ name: 'bazz' }),
-    User.create({ username: "ethyl", password: "123" }),
+    User.create({ username: "ethyl", password: "123", admin: true }),
   ]);
   // Mapping over the products var, imported from ./db/ProductData.js for seeding...NR
   await Promise.all(products.map((product) => Product.create(product)));
