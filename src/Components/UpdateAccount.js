@@ -9,12 +9,16 @@ const UpdateAccount = () => {
   const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [admin, setIsAdmin] = useState(false);
 
   const updateUser = async (ev) => {
     ev.preventDefault();
-    await dispatch(updateAuth({ username, password }));
+
+    await dispatch(updateAuth({ username, password, admin }));
     setUsername("");
     setPassword("");
+    setIsAdmin(false);
+
     navigate("/profile");
   };
 
@@ -22,15 +26,24 @@ const UpdateAccount = () => {
     <div>
       <h2>Update Account</h2>
       <form onSubmit={updateUser}>
-        <label>Username:</label>
         <input
           value={username}
           onChange={(ev) => setUsername(ev.target.value)}
+          placeholder="username"
+          name="username"
         />
-        <label>Password:</label>
         <input
           value={password}
           onChange={(ev) => setPassword(ev.target.value)}
+          type="password"
+          placeholder="password"
+          name="password"
+        />
+        <label htmlFor="admin">Become an admin</label>
+        <input
+          type="checkbox"
+          checked={admin}
+          onChange={(ev) => setIsAdmin(ev.target.checked)}
         />
         <button>Update Account</button>
       </form>
