@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../store";
 import { Link, useNavigate } from "react-router-dom";
-import { createItem } from "../store/cart";
+import { addToCart } from "../store/cart";
 import SingleProduct from "./SingleProduct";
 import SearchBar from "./SearchBar";
 
@@ -25,7 +25,11 @@ const Products = ({}) => {
   }, []);
 
   const createLineItem = async (product) => {
-    await dispatch(createItem({ product, quantity: 1 }));
+
+    //await dispatch(createItem({ product, quantity: 1 }));
+
+    await dispatch(addToCart(product));
+
     navigate("/cart");
   };
 
@@ -61,7 +65,7 @@ const Products = ({}) => {
             return (
               <li key={product.id}>
                 <Link to={`/products/${product.id}`} onClick={handleClick}>
-                  <img src={product.imageURL} id="cover-image" />
+                  <img src={product.imageUrl} id="cover-image" />
                 </Link>
                 <Link to={`/products/${product.id}`} onClick={handleClick}>
                   <p>

@@ -5,7 +5,7 @@ import { fetchReviews } from '../store';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Reviews = ({ product }) => {
-	const { reviews } = useSelector((state) => state);
+	const { reviews, auth } = useSelector((state) => state);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
@@ -27,7 +27,7 @@ const Reviews = ({ product }) => {
 					if (!review) return null;
 					return (
 						<li key={review.id}>
-							<p>Reviewed by: {review.userId}</p>
+							<p>Reviewed by: {auth.username}</p>
 							<h4>
 								{review.title} ({review.rating})
 							</h4>

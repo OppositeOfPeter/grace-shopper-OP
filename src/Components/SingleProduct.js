@@ -37,35 +37,36 @@ const SingleProduct = () => {
   // Fetch the reviews for this product when the component mounts.
 
   const createLineItem = async (product) => {
-    await dispatch(addToCart({ product, quantity: 1 }));
+    // await dispatch(addToCart({ product, quantity: 1 }));
+    await dispatch(addToCart(product));
     navigate("/cart");
   };
 
-	console.log('products: ', products);
-	console.log('product: ', product);
+  // console.log("products: ", products);
+  // console.log("product: ", product);
 
-	return (
-		<div>
-			<img src={product.imageUrl} alt={product.title} id='product_image' />
-			<h3>{product.title}</h3>
-			<p>{product.author}</p>
-			{/* add a link to 'rating' for adding users own review/rating...if user is logged in */}
-			<p>
-				Rating:
-				{product.rating?.reduce((acc, curr) => acc + curr, 0) /
-					product.rating?.length}{' '}
-				({product.rating?.length} reviews)
-			</p>
-			<p>{product.description}</p>
-			<p>${product.price}</p>
-			<button onClick={() => createLineItem(product)}>Add to Cart</button>
-			<br />
-			{/* if the user is not logged in, display a message that says
+  return (
+    <div>
+      <img src={product.imageUrl} alt={product.title} id="product_image" />
+      <h3>{product.title}</h3>
+      <p>{product.author}</p>
+      {/* add a link to 'rating' for adding users own review/rating...if user is logged in */}
+      <p>
+        Rating:
+        {product.rating?.reduce((acc, curr) => acc + curr, 0) /
+          product.rating?.length}{" "}
+        ({product.rating?.length} reviews)
+      </p>
+      <p>{product.description}</p>
+      <p>${product.price}</p>
+      <button onClick={() => createLineItem(product)}>Add to Cart</button>
+      <br />
+      {/* if the user is not logged in, display a message that says
 				"You must be logged in to add a review", if the user clicks on the message, they are redirected to the login page (useNavigate) */}
-			<Reviews product={product} />
-			{auth.id && <ReviewForm />}
-		</div>
-	);
+      <Reviews product={product} />
+      {auth.id && <ReviewForm />}
+    </div>
+  );
 };
 
 export default SingleProduct;
