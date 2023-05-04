@@ -21,41 +21,73 @@ const Products = ({}) => {
 		dispatch(fetchProducts());
 	}, []);
 
-	const createLineItem = async (product) => {
-		await dispatch(createItem({ product, quantity: 1 }));
-		navigate('/cart');
-	};
+  // Fetch the list of products when the component mounts.
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
 
-	return (
-		<div>
-			<ul>
-				{products.map((product) => {
-					if (!product) return null;
-					return (
-						<li key={product.id}>
-							<Link to={`/products/${product.id}`} onClick={handleClick}>
-								<img src={product.imageURL} id='list_image' />
-							</Link>
-							<Link to={`/products/${product.id}`} onClick={handleClick}>
-								<p>
-									Rating: {/* display the average rating for each product */}
-									{product.rating?.reduce((acc, curr) => acc + curr, 0) /
-										product.rating?.length}{' '}
-									({product.rating?.length} reviews)
-								</p>
-							</Link>
-							<Link to={`/products/${product.id}`} onClick={handleClick}>
-								<h4>{product.title}</h4>
-							</Link>
-							<p>by: {product.author}</p>
-							<button onClick={() => createLineItem(product)}>Add to Cart</button>
-						</li>
-					);
-				})}
-			</ul>
-			{product && <SingleProduct productId={product} />}
-		</div>
-	);
+  const createLineItem = async (product) => {
+    await dispatch(addToCart({ product, quantity: 1 }));
+    navigate("/cart");
+  };
+
+  //for the searchbar
+  const handleSearch = (searchTerm) => {
+    const filtered = products.filter((product) =>
+      product.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredProducts(filtered);
+  };
+
+  return (
+    <div>
+      <div>
+        <h2>Book Search</h2>
+        <p>Search by Title</p>
+        <SearchBar
+          data={products.map((product) => product.title)}
+          onSearch={handleSearch}
+        />
+        <div>
+          {filteredProducts.map((product) => (
+            <div key={product.id}>
+              <Link to={`/products/${product.id}`}>{product.title}</Link>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div>
+        <ul>
+          {products.map((product) => {
+            if (!product) return null;
+            return (
+              <li key={product.id}>
+                <Link to={`/products/${product.id}`} onClick={handleClick}>
+                  <img src={product.imageURL} id="cover-image" />
+                </Link>
+                <Link to={`/products/${product.id}`} onClick={handleClick}>
+                  <p>
+                    Rating: {/* display the average rating for each product */}
+                    {product.rating?.reduce((acc, curr) => acc + curr, 0) /
+                      product.rating?.length}{" "}
+                    ({product.rating?.length} reviews)
+                  </p>
+                </Link>
+                <Link to={`/products/${product.id}`} onClick={handleClick}>
+                  <h4>{product.title}</h4>
+                </Link>
+                <p>by: {product.author}</p>
+                <button onClick={() => createLineItem(product)}>
+                  Add to Cart
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+        {product && <SingleProduct productId={product} />}
+      </div>
+    </div>
+  );
 };
 
 export default Products;

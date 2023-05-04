@@ -29,14 +29,13 @@ const User = conn.define("user", {
       },
     },
   },
-  /*
-  shippingAddress: {
-    type: STRING,
-  },
+  // shippingAddress: {
+  //   type: STRING,
+  // },
   admin: {
     type: BOOLEAN,
     defaultValue: false,
-  },*/
+  },
 });
 
 User.prototype.createOrder = async function () {
@@ -61,6 +60,27 @@ User.prototype.getOrders = async function () {
     ],
   });
   return orders;
+};
+
+User.prototype.getAddresses = async function () {
+  let addresses = await conn.models.address.findAll({
+    where: {
+      userId: this.id,
+    },
+  });
+  return addresses;
+};
+
+User.prototype.createAddress = async function (_address) {
+  let address = await conn.models.address.create({
+    streetAddress: _address.streetAddress,
+    city: _address.city,
+    apt: _address.apt,
+    state: _address.state,
+    zipCode: _address.zipCode,
+    userId: this.id,
+  });
+  return address;
 };
 
 User.prototype.getCart = async function () {
@@ -158,9 +178,9 @@ User.authenticate = async function ({ username, password }) {
   throw error;
 };
 
-User.register = async function(credentials){
+User.register = async function (credentials) {
   const user = await this.create(credentials);
   return user.generateToken();
-}
+};
 
 module.exports = User;

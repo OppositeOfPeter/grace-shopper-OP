@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteItem, createItem, createOrder } from "../store";
+import { deleteItem, createOrder, addToCart } from "../store";
 import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
@@ -18,7 +18,7 @@ const Cart = () => {
 
   const createLineItem = async (lineItem) => {
     const product = lineItem.product;
-    await dispatch(createItem({ product, quantity: 1 }));
+    await dispatch(addToCart({ product, quantity: 1 }));
     navigate("/cart");
   };
 

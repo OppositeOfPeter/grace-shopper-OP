@@ -1,45 +1,45 @@
 // this component will display a single product
-import React, { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateProduct } from '../store/products'; // for admin use
-import { createItem } from '../store/cart';
-import Reviews from './Reviews.js';
-import ReviewForm from './ReviewForm';
-import { fetchReviews } from '../store/reviews';
-import { userIsLoggedIn } from '../store';
-import { auth } from '../store';
+import React, { useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { updateProduct } from "../store/products"; // for admin use
+import { addToCart } from "../store/cart";
+import Reviews from "./Reviews.js";
+import ReviewForm from "./ReviewForm";
+import { fetchReviews } from "../store/reviews";
+import { userIsLoggedIn } from "../store";
+import { auth } from "../store";
 // import { createReview } from '../store/reviews';
 
 const SingleProduct = () => {
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
-	const { id } = useParams();
-	const { products, reviews, auth } = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const { products, reviews, auth } = useSelector((state) => state);
 
-	const product = products.find((product) => product.id === id);
+  const product = products.find((product) => product.id === id);
 
-	if (!product) {
-		return null;
-	}
+  if (!product) {
+    return null;
+  }
 
-	// only show reviews for the product that is currently being viewed
-	const productReviews = reviews.filter(
-		(review) => review.productId === product.id
-	);
+  // only show reviews for the product that is currently being viewed
+  const productReviews = reviews.filter(
+    (review) => review.productId === product.id
+  );
 
-	// Find the review for this product that has been approved.
+  // Find the review for this product that has been approved.
 
-	const review = reviews.find(
-		(review) => review.productId === product.id && review.status === 'APPROVED'
-	);
+  const review = reviews.find(
+    (review) => review.productId === product.id && review.status === "APPROVED"
+  );
 
-	// Fetch the reviews for this product when the component mounts.
+  // Fetch the reviews for this product when the component mounts.
 
-	const createLineItem = async (product) => {
-		await dispatch(createItem({ product, quantity: 1 }));
-		navigate('/cart');
-	};
+  const createLineItem = async (product) => {
+    await dispatch(addToCart({ product, quantity: 1 }));
+    navigate("/cart");
+  };
 
 	console.log('products: ', products);
 	console.log('product: ', product);

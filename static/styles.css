@@ -1,5 +1,6 @@
 body {
 	font-family: verdana;
+	margin: 1rem;
 }
 
 form {
@@ -27,3 +28,37 @@ img,
 	width: 200px;
 	border-radius: 5px;
 }
+
+nav > a {
+  color: black;
+  font-weight: bold;
+  padding: 0.5rem;
+  text-decoration: none;
+}
+
+nav > a:hover {
+  text-shadow: 2px 2px 4px orange;
+}
+
+
+img,
+#cover-image {
+	width: 150px;
+	border-radius: 5px;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.title {
+	text-align: center;
+}
+
+.orange-text {
+  color: orange;
+}
+
