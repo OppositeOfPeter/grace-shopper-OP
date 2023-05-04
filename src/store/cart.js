@@ -51,16 +51,4 @@ export const deleteItem = (cart) => {
   };
 };
 
-// export const createOrder = (order) => {
-//   return async (dispatch) => {
-//     const token = window.localStorage.getItem("token");
-//     const response = await axios.post("/api/orders", order, {
-//       headers: {
-//         authorization: token,
-//       },
-//     });
-//     dispatch({ type: "CREATE_ORDER", order: response.data });
-//   };
-// };
-
 export default cart;
