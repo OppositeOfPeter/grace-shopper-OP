@@ -89,8 +89,8 @@ const App = () => {
             {!!auth.id && auth.admin && (
               <Route path="/products/addproduct" element={<AddProduct />} />
             )}
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/orders/:id" element={<Order />} />
+            {!!auth.id && <Route path="/orders" element={<Orders />} />}
+            {<Route path="/orders/:id" element={<Order />} />}
           </Routes>
         </div>
       }
