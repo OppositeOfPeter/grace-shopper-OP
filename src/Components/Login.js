@@ -19,30 +19,30 @@ const Login = () => {
     ev.preventDefault();
     dispatch(attemptLogin(credentials));
   };
-  
+
   return (
     <div>
       <div>
-      <h2>Login</h2>
-      <form onSubmit={login}>
-        <input
-          placeholder="username"
-          value={credentials.username}
-          name="username"
-          onChange={onChange}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          name="password"
-          value={credentials.password}
-          onChange={onChange}
-        />
-        <button>Login</button>
-      </form>
+        <h2>Login</h2>
+        <form onSubmit={login}>
+          <input
+            placeholder="username"
+            value={credentials.username}
+            name="username"
+            onChange={onChange}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            name="password"
+            value={credentials.password}
+            onChange={onChange}
+          />
+          <button>Login</button>
+        </form>
       </div>
       <div>
-        <CreateAccount />
+        <Link to="/signup">Create Account</Link>
       </div>
     </div>
   );
