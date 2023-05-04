@@ -1,22 +1,25 @@
 // src/components/Products.js
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchProducts } from "../store";
-import { Link, useNavigate } from "react-router-dom";
-import { addToCart } from "../store/cart";
-import SingleProduct from "./SingleProduct";
-import SearchBar from "./SearchBar";
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchProducts } from '../store';
+import { Link, useNavigate } from 'react-router-dom';
+import { createItem } from '../store/cart';
+import SingleProduct from './SingleProduct';
 
 const Products = ({}) => {
-  const [product, setProduct] = useState(null);
-  const { products } = useSelector((state) => state);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [filteredProducts, setFilteredProducts] = useState([]);
+	const [product, setProduct] = useState(null);
+	const { products } = useSelector((state) => state);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
-  const handleClick = (productId) => {
-    setProduct(productId);
-  };
+	const handleClick = (productId) => {
+		setProduct(productId);
+	};
+
+	// Fetch the list of products when the component mounts.
+	useEffect(() => {
+		dispatch(fetchProducts());
+	}, []);
 
   // Fetch the list of products when the component mounts.
   useEffect(() => {

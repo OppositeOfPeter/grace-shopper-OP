@@ -64,32 +64,34 @@ app.delete("/:id", async (req, res, next) => {
 });
 
 // (api/products/:id)
-app.get("/reviews", async (req, res, next) => {
-  try {
-    const product = await Product.findByPk(req.params.id);
-    if (product) {
-      res.send(await product.getReviews());
-    } else {
-      res.sendStatus(404);
-    }
-  } catch (ex) {
-    next(ex);
-  }
-});
+app.get('/:id/reviews', async (req, res, next) => {
+	try {
+		const product = await Product.findByPk(req.params.id);
+		if (product) {
+			res.send(await product.getReviews());
+		} else {
+			res.sendStatus(404);
+		}
+	} catch (ex) {
+		next(ex);
+	}
+}
+);
 
 // (api/products/:id)
-app.post("/reviews", async (req, res, next) => {
-  try {
-    const product = await Product.findByPk(req.params.id);
-    if (product) {
-      const review = await product.createReview(req.body);
-      res.status(201).send(review);
-    } else {
-      res.sendStatus(404);
-    }
-  } catch (ex) {
-    next(ex);
-  }
-});
+app.post('/:id/reviews', async (req, res, next) => {
+	try {
+		const product = await Product.findByPk(req.params.id);
+		if (product) {
+			const review = await product.createReview(req.body);
+			res.status(201).send(review);
+		} else {
+			res.sendStatus(404);
+		}
+	} catch (ex) {
+		next(ex);
+	}
+}
+);
 
 module.exports = app;

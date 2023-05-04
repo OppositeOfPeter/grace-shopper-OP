@@ -15,7 +15,18 @@ form > * {
 nav {
 	display: flex;
 	justify-content: space-around;
-	margin-bottom: 1rem;
+}
+
+img,
+#list-image {
+	width: 150px;
+	border-radius: 5px;
+}
+
+img,
+#product-image {
+	width: 200px;
+	border-radius: 5px;
 }
 
 nav > a {
