@@ -58,7 +58,7 @@ const App = () => {
   return (
     <div>
       <h1 className="title">
-        Acme Sh<span className="orange-text">o</span>pping
+        Bookwor<span className="green-text">m</span>
       </h1>
       {auth.id ? <Home /> : <Login />}
       {
