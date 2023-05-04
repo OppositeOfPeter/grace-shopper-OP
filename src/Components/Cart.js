@@ -35,17 +35,21 @@ const Cart = () => {
       <h1>Cart</h1>
       {/* I think we can remove this line below */}
       {/* <pre>{JSON.stringify(cart, null, 2)}</pre> */}
-      <ul>
+      <ul className="cart">
         {lineItems.map((lineItem, idx) => {
           return lineItem ? (
             <li key={lineItem.id || idx}>
+              <span>
               {lineItem.product.title} - {lineItem.quantity}
+              </span>
+              <div className="btn-container">
               <button onClick={() => deleteLineItem(lineItem.product)}>
                 remove 1 from cart
               </button>
               <button onClick={() => createLineItem(lineItem.product)}>
                 add 1 to cart
               </button>
+              </div>
             </li>
           ) : (
             ""

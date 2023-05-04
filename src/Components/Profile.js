@@ -11,6 +11,7 @@ const Profile = () => {
     <div>
       <h1> {auth.username}'s Profile</h1>
       <UpdateAccount />
+      <br/>
       <h2>Shipping Addresses</h2>
       <ul>
         {addresses.map((address) => {
