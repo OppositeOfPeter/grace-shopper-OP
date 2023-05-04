@@ -12,7 +12,7 @@ const Reviews = ({ product }) => {
 	// Fetch the list of reviews when the component mounts.
 	useEffect(() => {
 		dispatch(fetchReviews());
-	}, [dispatch]);
+	}, []);
 
 	// only show reviews for the product that is currently being viewed
 	const productReviews = reviews.filter(

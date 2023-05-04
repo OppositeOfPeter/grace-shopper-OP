@@ -12,6 +12,7 @@ const Products = ({}) => {
   const { products } = useSelector((state) => state);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [filteredProducts, setFilteredProducts] = useState([]);
 
   const handleClick = (productId) => {
