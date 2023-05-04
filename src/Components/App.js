@@ -15,6 +15,7 @@ import {
   fetchProducts,
   fetchReviews,
   fetchAddresses,
+  fetchOrders,
 } from "../store";
 import { Link, Routes, Route } from "react-router-dom";
 import AddProduct from "./AddProduct";
@@ -24,10 +25,10 @@ const App = () => {
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  console.log(auth);
-
   useEffect(() => {
-    dispatch(loginWithToken());
+    dispatch(loginWithToken()).catch((ex) => {
+      dispatch(fetchCart());
+    });
     dispatch(fetchProducts());
   }, []);
 
@@ -50,12 +51,15 @@ const App = () => {
     }
     if (prevAuth.current.id && !auth.id) {
       console.log("logged out");
+      dispatch(fetchCart());
     }
   }, [auth]);
 
   return (
     <div>
-      <h1 className="title">Acme Sh<span className="orange-text">o</span>pping</h1>
+      <h1 className="title">
+        Acme Sh<span className="orange-text">o</span>pping
+      </h1>
       {auth.id ? <Home /> : <Login />}
       {
         <div>
