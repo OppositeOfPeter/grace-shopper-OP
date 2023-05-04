@@ -7,6 +7,7 @@ import { createItem } from '../store/cart';
 import SingleProduct from './SingleProduct';
 import SearchBar from './SearchBar';
 
+
 const Products = ({}) => {
 	const [product, setProduct] = useState(null);
 	const { products, reviews } = useSelector((state) => state);
@@ -38,11 +39,6 @@ const Products = ({}) => {
 		setFilteredProducts(filtered);
 	};
 
-	const productReviews = reviews.filter(
-		(review) => review.productId === product.id
-	);
-	const ratings = productReviews.map((productReview) => productReview.rating);
-
 	return (
 		<div>
 			<div>
@@ -71,8 +67,8 @@ const Products = ({}) => {
 								</Link>
 								<Link to={`/products/${product.id}`} onClick={handleClick}>
 									<p>
-										Rating:
-                    {reviews.filter((review) => {
+										Click for Rating
+                    {/* {reviews.filter((review) => {
                       review.productId === product.id
                     }).map((review) => {
                       return review.rating
@@ -87,7 +83,7 @@ const Products = ({}) => {
 										
 										{reviews.filter((review) => {
                       review.productId === product.id
-                    }).length}{' '} reviews
+                    }).length}{' '} reviews */}
 									</p>
 								</Link>
 								<Link to={`/products/${product.id}`} onClick={handleClick}>
