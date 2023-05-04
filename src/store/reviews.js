@@ -20,7 +20,6 @@ export const fetchReviews = () => {
 
 export const addReview = (review) => {
   return async (dispatch) => {
-    console.log(review);
     const response = await axios.post(
       `/api/products/${review.productId}/reviews`,
       review
