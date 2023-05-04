@@ -61,7 +61,7 @@ const Products = ({}) => {
             return (
               <li key={product.id}>
                 <Link to={`/products/${product.id}`} onClick={handleClick}>
-                  <img src={product.imageURL} id="cover-image" />
+                  <img src={product.imageUrl} id="cover-image" />
                 </Link>
                 <Link to={`/products/${product.id}`} onClick={handleClick}>
                   <p>
