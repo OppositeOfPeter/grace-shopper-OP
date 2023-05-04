@@ -42,7 +42,7 @@ const Product = conn.define("product", {
       min: 0.0,
     },
   },
-  imageURL: {
+  imageUrl: {
     type: STRING,
     defaultValue: "https://www.bookdeal.com/images/no-image.png",
   },
