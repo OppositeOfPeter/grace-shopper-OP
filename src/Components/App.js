@@ -6,7 +6,7 @@ import ProductsList from "./ProductList";
 import SingleProduct from "./SingleProduct";
 import Orders from "./Orders";
 import Order from "./Order";
-import Reviews from "./Reviews.js"; // not sure if this is needed
+import Reviews from "./Reviews.js";
 import Profile from "./Profile";
 import { useSelector, useDispatch } from "react-redux";
 import {
