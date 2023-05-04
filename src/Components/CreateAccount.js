@@ -35,7 +35,7 @@ const CreateAccount = ()=> {
   
   return (
     <div>
-      <h2>Create Acc<span className="orange-text">o</span>unt</h2>
+      <h2>Create Account</h2>
       <form onSubmit={ registerUser }>
          <input 
             value={ username } 

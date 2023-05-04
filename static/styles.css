@@ -38,7 +38,7 @@ nav > a {
 }
 
 nav > a:hover {
-  text-shadow: 2px 2px 4px orange;
+  text-shadow: 2px 2px 4px #3ea33e;
 }
 
 
@@ -59,8 +59,9 @@ img,
 	text-align: center;
 }
 
-.orange-text {
-  color: orange;
+.green-text {
+  color: #3ea33e
+;
 }
 
 
@@ -87,7 +88,7 @@ textarea {
 }
 
 button {
-  background-color: orange;
+  background-color: #3ea33e;
   color: white;
   border: none;
   padding: 8px;
@@ -130,7 +131,7 @@ li > a:hover {
 }
 
 .cart li button {
-  background-color: orange;
+  background-color: #3ea33e;
   color: white;
   border: none;
   padding: 8px;
