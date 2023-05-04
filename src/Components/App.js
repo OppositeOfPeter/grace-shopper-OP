@@ -52,7 +52,6 @@ const App = () => {
     if (prevAuth.current.id && !auth.id) {
       console.log("logged out");
       dispatch(fetchCart());
-      dispatch(fetchOrders([]));
     }
   }, [auth]);
 

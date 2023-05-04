@@ -10,7 +10,7 @@ const Orders = () => {
 
   useEffect(() => {
     dispatch(fetchOrders());
-  }, []);
+  }, [auth]);
 
   return (
     <div>

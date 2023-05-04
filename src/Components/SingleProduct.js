@@ -42,8 +42,8 @@ const SingleProduct = () => {
     navigate("/cart");
   };
 
-  console.log("products: ", products);
-  console.log("product: ", product);
+  // console.log("products: ", products);
+  // console.log("product: ", product);
 
   return (
     <div>
