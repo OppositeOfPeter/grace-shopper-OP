@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../store";
 import { Link, useNavigate } from "react-router-dom";
-import { addToCart } from "../store/cart";
+import { createItem } from "../store/cart";
 import SingleProduct from "./SingleProduct";
 import SearchBar from "./SearchBar";
 
@@ -24,7 +24,7 @@ const Products = ({}) => {
   }, []);
 
   const createLineItem = async (product) => {
-    await dispatch(addToCart({ product, quantity: 1 }));
+    await dispatch(createItem({ product, quantity: 1 }));
     navigate("/cart");
   };
 
