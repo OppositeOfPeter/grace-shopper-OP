@@ -44,8 +44,7 @@ const Products = ({}) => {
   return (
     <div>
       <div>
-        <h2>Book Search</h2>
-        <p>Search by Title</p>
+       <h2>Book Search</h2><p>Search by Title</p>
         <SearchBar
           data={products.map((product) => product.title)}
           onSearch={handleSearch}
@@ -82,6 +81,8 @@ const Products = ({}) => {
                 <button onClick={() => createLineItem(product)}>
                   Add to Cart
                 </button>
+                <br/>
+                <br/>
               </li>
             );
           })}

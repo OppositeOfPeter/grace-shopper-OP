@@ -39,12 +39,14 @@ const UpdateAccount = () => {
           placeholder="password"
           name="password"
         />
+        <span>
         <label htmlFor="admin">Become an admin</label>
         <input
           type="checkbox"
           checked={admin}
           onChange={(ev) => setIsAdmin(ev.target.checked)}
         />
+        </span>
         <button>Update Account</button>
       </form>
       <Link to={"/profile/addaddress"}>Add Shipping Address</Link>
