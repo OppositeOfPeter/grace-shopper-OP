@@ -20,6 +20,7 @@ import {
 import { Link, Routes, Route } from "react-router-dom";
 import AddProduct from "./AddProduct";
 import AddShippingAddress from "./AddShippingAddress";
+import CreateAccount from "./CreateAccount";
 
 const App = () => {
   const { auth } = useSelector((state) => state);
@@ -88,6 +89,7 @@ const App = () => {
             )}
             {!!auth.id && <Route path="/orders" element={<Orders />} />}
             {<Route path="/orders/:id" element={<Order />} />}
+            {!auth.id && <Route path="/signup" element={<CreateAccount />} />}
           </Routes>
         </div>
       }
