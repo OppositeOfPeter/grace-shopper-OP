@@ -15,19 +15,21 @@ import {
   fetchProducts,
   fetchReviews,
   fetchAddresses,
+  fetchOrders,
 } from "../store";
 import { Link, Routes, Route } from "react-router-dom";
 import AddProduct from "./AddProduct";
 import AddShippingAddress from "./AddShippingAddress";
+import CreateAccount from "./CreateAccount";
 
 const App = () => {
   const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  console.log(auth);
-
   useEffect(() => {
-    dispatch(loginWithToken());
+    dispatch(loginWithToken()).catch((ex) => {
+      dispatch(fetchCart());
+    });
     dispatch(fetchProducts());
   }, []);
 
@@ -50,12 +52,12 @@ const App = () => {
     }
     if (prevAuth.current.id && !auth.id) {
       console.log("logged out");
+      dispatch(fetchCart());
     }
   }, [auth]);
 
   return (
     <div>
-      <h1 className="title">Acme Sh<span className="orange-text">o</span>pping</h1>
       {auth.id ? <Home /> : <Login />}
       {
         <div>
@@ -85,8 +87,9 @@ const App = () => {
             {!!auth.id && auth.admin && (
               <Route path="/products/addproduct" element={<AddProduct />} />
             )}
-            <Route path="/orders" element={<Orders />} />
-            <Route path="/orders/:id" element={<Order />} />
+            {!!auth.id && <Route path="/orders" element={<Orders />} />}
+            {<Route path="/orders/:id" element={<Order />} />}
+            {!auth.id && <Route path="/signup" element={<CreateAccount />} />}
           </Routes>
         </div>
       }

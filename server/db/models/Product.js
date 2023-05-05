@@ -58,6 +58,7 @@ Product.prototype.getReviews = async function () {
     },
   });
   return reviews;
-};
+}; 
+
 
 module.exports = Product;

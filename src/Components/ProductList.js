@@ -1,11 +1,11 @@
 // src/components/Products.js
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchProducts, fetchReviews } from '../store';
-import { Link, useNavigate } from 'react-router-dom';
-import { createItem } from '../store/cart';
-import SingleProduct from './SingleProduct';
-import SearchBar from './SearchBar';
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProducts } from "../store";
+import { Link, useNavigate } from "react-router-dom";
+import { addToCart } from "../store/cart";
+import SingleProduct from "./SingleProduct";
+import SearchBar from "./SearchBar";
 
 
 const Products = ({}) => {
@@ -26,10 +26,14 @@ const Products = ({}) => {
 		dispatch(fetchReviews());
 	}, []);
 
-	const createLineItem = async (product) => {
-		await dispatch(addToCart({ product, quantity: 1 }));
-		navigate('/cart');
-	};
+  const createLineItem = async (product) => {
+
+    //await dispatch(createItem({ product, quantity: 1 }));
+
+    await dispatch(addToCart(product));
+
+    navigate("/cart");
+  };
 
 	//for the searchbar
 	const handleSearch = (searchTerm) => {
@@ -79,9 +83,9 @@ const Products = ({}) => {
 											return acc;
 										}, 0) / reviews.filter((review) => {
                       review.productId === product.id
-                    }).length}{' '}
+                    }).length}{' '} */}
 										
-										{reviews.filter((review) => {
+										{/* {reviews.filter((review) => {
                       review.productId === product.id
                     }).length}{' '} reviews */}
 									</p>
@@ -92,6 +96,8 @@ const Products = ({}) => {
 								<p>by: {product.author}</p>
                 <p>${product.price}</p>
 								<button onClick={() => createLineItem(product)}>Add to Cart</button>
+                <br/>
+                <br/>
 							</li>
 						);
 					})}
