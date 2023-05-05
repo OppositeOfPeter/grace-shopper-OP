@@ -42,11 +42,6 @@ const Products = ({}) => {
 		setFilteredProducts(filtered);
 	};
 
-	const productReviews = reviews.filter(
-		(review) => review.productId === product.id
-	);
-	const ratings = productReviews.map((productReview) => productReview.rating);
-
 	return (
 		<div>
 			<div>
