@@ -1,11 +1,23 @@
 const express = require("express");
 const app = express.Router();
 const { Product } = require("../db");
+const Review = require("../db/models/Review");
 
 // (api/products)
 app.get("/", async (req, res, next) => {
   try {
     res.send(await Product.findAll());
+    // res.send(await Product.getReviews())
+  } catch (ex) {
+    next(ex);
+  }
+});
+
+
+// (api/products/)
+app.get('/reviews', async (req, res, next) => {
+	try {
+    res.send(await Review.findAll());
   } catch (ex) {
     next(ex);
   }

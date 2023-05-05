@@ -27,13 +27,12 @@ const Reviews = ({ product }) => {
 					if (!review) return null;
 					return (
 						<li key={review.id}>
-							<p>Reviewed by: {auth.username}</p>
 							<h4>
-								{review.title} ({review.rating})
+								({review.rating} Stars) - {review.title}
 							</h4>
-							<p>{review.date}</p>
+							<p>Reviewed by: {auth.username}</p>
+							<p>Date of Review: {review.date}</p>
 							<p>{review.content}</p>
-							<p>{review.status}</p>
 						</li>
 					);
 				})}

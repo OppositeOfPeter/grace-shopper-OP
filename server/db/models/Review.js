@@ -34,8 +34,8 @@ const Review = conn.define('review', {
 	},
 	status: {
 		type: ENUM('APPROVED', 'PENDING', 'DENIED'),
-		allowNull: false,
-		defaultValue: 'PENDING',
+		allowNull: true,
+		defaultValue: 'APPROVED',
 	},
 });
 
