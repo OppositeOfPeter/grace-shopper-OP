@@ -41,34 +41,31 @@ const SingleProduct = () => {
 		(review) => review.productId === product.id && review.status === 'PENDING'
 	);
 
-	const updateRating = async (avgRating) => {
-		setAvgRating(_avgRating)
-		await dispatch(updateProduct(avgRating, id))
-	}
-	
-
 	const createLineItem = async (product) => {
-		await dispatch(addToCart({ product, quantity: 1 }));
-		navigate('/cart');
-	};
+		// await dispatch(addToCart({ product, quantity: 1 }));
+		await dispatch(addToCart(product));
+		navigate("/cart");
+	  };
 
 	return (
 		<div>
-			<img src={product.imageUrl} alt={product.title} id="product_image" />
-			<h3>{product.title}</h3>
-			<p>{product.author}</p>
-			<p>
-				Rating:
+		  <img src={product.imageUrl} alt={product.title} id="product_image" />
+		  <h3>{product.title}</h3>
+		  <p>{product.author}</p>
+		  <p>
+		  Rating:
 				{_avgRating}({productReviews?.length} reviews)
-			</p>
-			<p>{product.description}</p>
-			<p>${product.price}</p>
-			<button onClick={() => createLineItem(product)}>Add to Cart</button>
-			<br />
-			<Reviews product={product} />
-			{auth.id && <ReviewForm />}
+		  </p>
+		  <p>{product.description}</p>
+		  <p>${product.price}</p>
+		  <button onClick={() => createLineItem(product)}>Add to Cart</button>
+		  <br />
+		  <Reviews product={product} />
+		  {auth.id && <ReviewForm />}
 		</div>
-	);
+	  );
+
+
 };
 
 export default SingleProduct;

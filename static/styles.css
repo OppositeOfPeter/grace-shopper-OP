@@ -1,6 +1,7 @@
 body {
 	font-family: verdana;
 	margin: 1rem;
+	text-align: center;
 }
 
 form {
@@ -37,7 +38,7 @@ nav > a {
 }
 
 nav > a:hover {
-  text-shadow: 2px 2px 4px orange;
+  text-shadow: 2px 2px 4px #3ea33e;
 }
 
 
@@ -58,7 +59,100 @@ img,
 	text-align: center;
 }
 
-.orange-text {
-  color: orange;
+.green-text {
+  color: #3ea33e
+;
 }
 
+
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+input,
+textarea {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+textarea {
+  height: 150px;
+}
+
+button {
+  background-color: #3ea33e;
+  color: white;
+  border: none;
+  padding: 8px;
+  font-size: 16px;
+  margin: 8px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  color: black;
+}
+
+ul {
+	list-style: none;
+}
+
+li > a {
+  color: black;
+  text-decoration: none;
+}
+
+li > a:hover {
+  text-decoration: underline;
+}
+
+.cart {
+	list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cart li {
+	display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.cart li button {
+  background-color: #3ea33e;
+  color: white;
+  border: none;
+  padding: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px
+}
+
+.cart li button:hover {
+  color: black;
+}
+
+.cart li span {
+  margin-right: 10px;
+}
+
+.cart li .btn-container {
+  display: flex;
+}
+
+span > .searchbar {
+  display: inline-block;
+  margin-right: 10px;
+}

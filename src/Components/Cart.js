@@ -10,15 +10,18 @@ const Cart = () => {
 
   const lineItems = cart.lineItems;
 
-  const deleteLineItem = async (lineItem) => {
-    const product = lineItem.product;
-    dispatch(deleteItem({ product, quantityToRemove: 1 }));
+  const deleteLineItem = async (product) => {
+    // const product = lineItem.product;
+    // dispatch(deleteItem({ product, quantityToRemove: 1 }));
+    await dispatch(deleteItem(product));
     navigate("/cart");
   };
 
-  const createLineItem = async (lineItem) => {
-    const product = lineItem.product;
-    await dispatch(addToCart({ product, quantity: 1 }));
+  const createLineItem = async (product) => {
+    // console.log("product", product);
+    // const product = lineItem.product;
+    // await dispatch(addToCart({ product, quantity: 1 }));
+    await dispatch(addToCart(product));
     navigate("/cart");
   };
 
@@ -32,17 +35,21 @@ const Cart = () => {
       <h1>Cart</h1>
       {/* I think we can remove this line below */}
       {/* <pre>{JSON.stringify(cart, null, 2)}</pre> */}
-      <ul>
-        {lineItems.map((lineItem) => {
+      <ul className="cart">
+        {lineItems.map((lineItem, idx) => {
           return lineItem ? (
-            <li key={lineItem.id}>
+            <li key={lineItem.id || idx}>
+              <span>
               {lineItem.product.title} - {lineItem.quantity}
-              <button onClick={() => deleteLineItem(lineItem)}>
+              </span>
+              <div className="btn-container">
+              <button onClick={() => deleteLineItem(lineItem.product)}>
                 remove 1 from cart
               </button>
-              <button onClick={() => createLineItem(lineItem)}>
+              <button onClick={() => createLineItem(lineItem.product)}>
                 add 1 to cart
               </button>
+              </div>
             </li>
           ) : (
             ""

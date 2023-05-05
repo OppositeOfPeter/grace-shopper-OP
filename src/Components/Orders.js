@@ -4,13 +4,13 @@ import { fetchOrders } from "../store";
 import { Link } from "react-router-dom";
 
 const Orders = () => {
-  const { orders, products } = useSelector((state) => state);
+  const { orders, auth } = useSelector((state) => state);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchOrders());
-  }, []);
+  }, [auth]);
 
   return (
     <div>
