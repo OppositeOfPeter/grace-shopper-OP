@@ -58,7 +58,7 @@ const Products = ({}) => {
         </div>
       </div>
       <div>
-        <ul>
+        <ul className="booklist">
           {products.map((product) => {
             if (!product) return null;
             return (

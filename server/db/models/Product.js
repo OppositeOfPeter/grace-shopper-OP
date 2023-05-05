@@ -48,4 +48,15 @@ const Product = conn.define("product", {
   },
 });
 
+
+Product.prototype.getReviews = async function () {
+  let reviews = await conn.models.review.findAll({
+    where: {
+      productId: this.id,
+    },
+  });
+  return reviews;
+}; 
+
+
 module.exports = Product;

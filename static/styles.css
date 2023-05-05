@@ -16,6 +16,7 @@ form > * {
 nav {
 	display: flex;
 	justify-content: space-around;
+	background-color: #79B379;
 }
 
 img,
@@ -152,7 +153,21 @@ li > a:hover {
   display: flex;
 }
 
-span > .searchbar {
-  display: inline-block;
-  margin-right: 10px;
+
+img {
+  width: 300px; /* set the desired width */
+  height: 200px; /* set the desired height */
+  object-fit: contain; /* maintain aspect ratio without warping */
+}
+
+.booklist {
+	display: flex;
+  flex-wrap: wrap;
+}
+
+.booklist li {
+  justify-content: space-around;
+  flex: 1 0 calc(33.33% - 20px);
+ /* border: 1px solid black;
+  margin: 1rem;*/
 }
